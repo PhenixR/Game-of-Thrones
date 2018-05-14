@@ -1,8 +1,5 @@
 <template>
     <div class="root">
-        <header>
-            <img src="../images/headerbg.jpg" class="herderbg">
-        </header>
         <div class="container">
             <div class="nav">
                 <ul>
@@ -14,10 +11,10 @@
             <div class="pages">
                 <div class="home_container">
                     <transition-group tag="ul" name="list">
-                        <li v-for="(list,index) in slideList" :key="index" v-show="index === currentIndex" @mouseenter="stop" @mouseleave="go">
-                            <a :href="list.clickUrl">
-                                <img :src="list.image" :alt="list.desc" class="slidepic">
-                            </a>
+                        <li v-for="(list,index) in slideList" :key="index" v-show="index === currentIndex" @mouseenter="stop" @mouseleave="go" :class="list.dise">
+                            <!--<a :href="list.clickUrl">
+                                  <img :src="list.image" :alt="list.desc" class="slidepic">
+                            </a>-->
                         </li>
                     </transition-group>
                 </div>
@@ -33,16 +30,14 @@
     </div>
 </template>
 
-<style>
+<style scoped>
+
 *{
     margin: 0;
     padding: 0;
 }
-.herderbg {
-    height: 400px;
-    width: 100%;
-    display: block;
-    filter: contrast(80%)
+.root {
+    font-family:'Times New Roman', Times, serif;
 }
 .container {
     display: flex;
@@ -187,11 +182,39 @@
     color: #d2cdb9;
     height: 100%;
 }
+.home_container .tully {
+    background-image: url("../images/tully.jpg");
+    background-size: 312px 234px;
+}
+.home_container .targaryen {
+    background-image: url("../images/targaryen.jpg");
+    background-size: 312px 234px;
+}
+.home_container .stark {
+    background-image: url("../images/stark.jpg");
+    background-size: 312px 234px;
+}
+.home_container .lannister {
+    background-image: url("../images/lannister.jpg");
+    background-size: 312px 234px;
+}
+.home_container .greyjoy {
+    background-image: url("../images/greyjoy.jpg");
+    background-size: 312px 234px;
+}
+.home_container .baratheon {
+    background-image: url("../images/baratheon.jpg");
+    background-size: 312px 234px;
+}
+.home_container .arryn {
+    background-image: url("../images/arryn.jpg");
+    background-size: 312px 234px;
+}
 </style>
 
 <script>
 export default {
-  name: 'itemcontainer',
+  name: 'family',
   data () {
       return {
           links: [],
@@ -199,7 +222,7 @@ export default {
             {
                 "clickUrl" : '#',
                 "dise" : "tully",
-                "image" : "/static/img/tully.28bbbc7.jpg",
+                //"image" : "../assets/tully.28bbbc7.jpg",
                 "nav" : "Tully",
                 "story" : "Family, Duty, Honor  家族、责任、光荣流传",
                 "color" : "black"
@@ -207,7 +230,7 @@ export default {
             {
                 "clickUrl" : '#',
                 "dise" : "targaryen",
-                "image" : "/static/img/targaryen.362adf9.jpg",
+                //"image" : "../assets/targaryen.362adf9.jpg",
                 "nav" : "Targaryen",
                 "story" : "Fire and Blood  血火同源",
                 "color" : "white"
@@ -215,7 +238,7 @@ export default {
             {
                 "clickUrl" : '#',
                 "dise" : "stark",
-                "image" : "/static/img/stark.4d9f732.jpg",
+                //"image" : "../assets/stark.4d9f732.jpg",
                 "nav" : "Stark",
                 "story" : "Winter is coming   凛冬将至",
                 "color" : "black"
@@ -223,7 +246,7 @@ export default {
             {
                 "clickUrl" : '#',
                 "dise" : "lannister",
-                "image" : "/static/img/lannister.9357d15.jpg",
+                //"image" : "../assets/lannister.9357d15.jpg",
                 "nav" : "Lannister",
                 "story" : "Hear Me Roar!  听我怒吼！",
                 "color" : "black"
@@ -231,7 +254,7 @@ export default {
             {
                 "clickUrl" : '#',
                 "dise" : "greyjoy",
-                "image" : "/static/img/greyjoy.a1a1fc7.jpg",
+                //"image" : "../assets/greyjoy.a1a1fc7.jpg",
                 "nav" : "Greyjoy",
                 "story" : "We Do Not Sow  强取胜于苦耕",
                 "color" : "black"
@@ -239,7 +262,7 @@ export default {
             {
                 "clickUrl" : '#',
                 "dise" : "baratheon",
-                "image" : "/static/img/baratheon.b35bbdc.jpg",
+                //"image" : "../assets/baratheon.b35bbdc.jpg",
                 "nav" : "Baratheon",
                 "story" : "Ours Is the Fury  怒火燎原",
                 "color" : "black"
@@ -247,7 +270,7 @@ export default {
             {
                 "clickUrl" : '#',
                 "dise" : "arryn",
-                "image" : "/static/img/arryn.63229b6.jpg",
+                //"image" : "../assets/arryn.63229b6.jpg",
                 "nav" : "Arryn",
                 "story" : " As High as Honor  高如荣誉",
                 "color" : "black"
