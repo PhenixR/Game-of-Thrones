@@ -3,30 +3,31 @@
         <header>
             <img src="../images/headerbg.jpg" class="herderbg">
         </header>
-        <div class="nav">
-            <router-link v-for="routerurl in slideList" class="nav_router" :to="routerurl.path">
-                <span class="nav_link" v-for="(item,index) in slideList" :class="{'active':index===currentIndex}" @mouseover="change(index)">
-                    {{item.nav}}
-                </span>
-            </router-link>
-        </div>
-        <div class="pages">
-            <div class="home_container">
-                <transition-group tag="ul" name="list">
-                    <li v-for="(list,index) in slideList" :key="index" v-show="index === currentIndex">
-                        <a :href="list.clickUrl">
-                            <img :src="list.image" :alt="list.desc" class="slidepic">
-                        </a>
+        <div class="container">
+            <div class="nav">
+                <ul>
+                    <li class="nav_name" v-for="(item,index) in slideList" @mouseover="change(index)">
+                        {{item.nav}}
+                    </li>
+                </ul>
+            </div>
+            <div class="pages">
+                <div class="home_container">
+                    <transition-group tag="ul" name="list">
+                        <li v-for="(list,index) in slideList" :key="index" v-show="index === currentIndex" @mouseenter="stop" @mouseleave="go">
+                            <a :href="list.clickUrl">
+                                <img :src="list.image" :alt="list.desc" class="slidepic">
+                            </a>
+                        </li>
+                    </transition-group>
+                </div>
+            </div>
+            <div class="story_box">
+                <transition-group tag="ul" name="story">
+                    <li class="story" v-for="(story,index) in slideList" :key="index" v-show="index === currentIndex" @mouseenter="stop" @mouseleave="go"> 
+                        <p :class="story.dise">{{story.story}}</p> 
                     </li>
                 </transition-group>
-                <img src="../images/tully.jpg" alt="">
-                <img src="../images/targaryen.jpg" alt="">
-                <img src="../images/stark.jpg" alt="">
-                <img src="../images/slidepic.jpg" alt="">
-                <img src="../images/lannister.jpg" alt="">
-                <img src="../images/greyjoy.jpg" alt="">
-                <img src="../images/baratheon.jpg" alt="">
-                <img src="../images/arryn.jpg" alt="">
             </div>
         </div>
     </div>
@@ -43,11 +44,18 @@
     display: block;
     filter: contrast(80%)
 }
-.nav {
-    width: 100%;
+.container {
     display: flex;
+}
+.nav ul {
+    display: flex;
+    flex-direction: column;
     justify-content: space-around;
-    background-color: #b5843c;
+    background-color: #181c1d;
+    height: 234px;
+}
+.nav ul li {
+    padding: 5px 12px 5px 13px;
 }
 .nav_router {
     text-decoration: none;
@@ -56,12 +64,14 @@
 .nav_router:active {
     color: rgb(17, 11, 32);
 }
-.nav_link {
+.nav_name {
   cursor: pointer;
-  padding: 0 30px;
+  padding:0 30px;
+  color: #c1c0c0;
 }
-.nav_link:hover {
-    background-color: #cf8f2e;
+.nav_name:hover {
+    background-color: #0f0f14;
+    color: #dadada;
 }
 .home_container {
     position: relative;
@@ -71,6 +81,10 @@
     
 }
 .slidepic {
+    width: 100%;
+    height: 100%;
+}
+.slide_story {
     width: 100%;
     height: 100%;
 }
@@ -85,6 +99,23 @@
     position: absolute;
     width: 312px;
     height: 234px;
+}
+.story_box {
+    position: relative;
+    height: 234px;
+    width: 100%;
+    overflow: hidden;
+}
+.story_box ul {
+    list-style-type: none;
+}
+.story_box ul li {
+    position: absolute;
+}
+.story {
+    font-size: 50px;
+    height: 100%;
+    width: 100%;
 }
 .list-enter-to {
   transition: all 1s ease;
@@ -103,6 +134,59 @@
 .list-leave {
   transform: translateX(0)
 }
+.story-enter-to {
+  transition: all 1s ease;
+  transform: translateX(0);
+}
+
+.story-leave-active {
+  transition: all 1s ease;
+  transform: translateX(-100%)
+}
+
+.story-enter {
+  transform: translateX(100%)
+}
+
+.story-leave {
+  transform: translateX(0)
+}
+.tully {
+    background-color: #00163c;
+    color: #c1c0c0;
+    height: 100%;
+}
+.targaryen {
+    background-color: #140403;
+    color: #cf381b;
+    height: 100%;
+}
+.stark {
+    background-color: #e1ded6;
+    color: #140403;
+    height: 100%;
+}
+.lannister {
+    background-color: #9d2414;
+    color: #efb42c;
+    height: 100%;
+    
+}
+.greyjoy {
+    background-color: #080803;
+    color: #fac935;
+    height: 100%;
+}
+.baratheon {
+    background-color: #efb42c;
+    color: #080803;
+    height: 100%;
+}
+.arryn {
+    background-color: #141b51;
+    color: #d2cdb9;
+    height: 100%;
+}
 </style>
 
 <script>
@@ -116,44 +200,57 @@ export default {
                 "clickUrl" : '#',
                 "dise" : "tully",
                 "image" : "/static/img/tully.28bbbc7.jpg",
-                "nav" : "Home",
-                "path" : ".."
+                "nav" : "Tully",
+                "story" : "Family, Duty, Honor  家族、责任、光荣流传",
+                "color" : "black"
             },
             {
                 "clickUrl" : '#',
                 "dise" : "targaryen",
                 "image" : "/static/img/targaryen.362adf9.jpg",
-                "nav" : "Martin"
+                "nav" : "Targaryen",
+                "story" : "Fire and Blood  血火同源",
+                "color" : "white"
             },
             {
                 "clickUrl" : '#',
                 "dise" : "stark",
                 "image" : "/static/img/stark.4d9f732.jpg",
-                "nav" : "Characters"
+                "nav" : "Stark",
+                "story" : "Winter is coming   凛冬将至",
+                "color" : "black"
             },
             {
                 "clickUrl" : '#',
                 "dise" : "lannister",
                 "image" : "/static/img/lannister.9357d15.jpg",
-                "nav" : "Season"
+                "nav" : "Lannister",
+                "story" : "Hear Me Roar!  听我怒吼！",
+                "color" : "black"
             },
             {
                 "clickUrl" : '#',
                 "dise" : "greyjoy",
                 "image" : "/static/img/greyjoy.a1a1fc7.jpg",
-                "nav" : "About"
+                "nav" : "Greyjoy",
+                "story" : "We Do Not Sow  强取胜于苦耕",
+                "color" : "black"
             },
             {
                 "clickUrl" : '#',
                 "dise" : "baratheon",
                 "image" : "/static/img/baratheon.b35bbdc.jpg",
-                "nav" : "+"
+                "nav" : "Baratheon",
+                "story" : "Ours Is the Fury  怒火燎原",
+                "color" : "black"
             },
             {
                 "clickUrl" : '#',
                 "dise" : "arryn",
                 "image" : "/static/img/arryn.63229b6.jpg",
-                "nav" : "+"
+                "nav" : "Arryn",
+                "story" : " As High as Honor  高如荣誉",
+                "color" : "black"
             }
         ],
         currentIndex: 0,
@@ -173,11 +270,20 @@ export default {
                 this.currentIndex = index
             },
       autoPlay() {
-          this.currentIndex++
-         if (this.currentIndex > this.slideList.length - 1) {
-              this.currentIndex = 0
-          }
-      }
+            this.currentIndex++
+            if (this.currentIndex > this.slideList.length - 1) {
+                this.currentIndex = 0
+            }
+        },
+        go() {
+            this.timer = setInterval(() => {
+                this.autoPlay()
+            }, 4000)
+        },
+        stop() {
+            clearInterval(this.timer)
+            this.timer = null
+        },
   }
   
 }
